@@ -1,7 +1,8 @@
 # api/index.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import os
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 app = FastAPI()
 
@@ -29,4 +30,9 @@ def read_item(item_id: int, q: str|None=None):
     """
     return {"item_id": item_id, "q": q}
 
+app.mount("/", StaticFiles(directory="dist", html=True), name="dist")
+
 # You can add more FastAPI routes here
+@app.get("/{path:path}")
+async def serve_index(path: str):
+    return FileResponse("dist/index.html")
