@@ -367,12 +367,12 @@ const projects: Project[] = [
   {
     name: "Quipubase",
     url: "https://quipubase.oscarbahamonde.com",
-	image: "/quipubase.png"
+	image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png"
   },
   {
     name: "Lucidata",
     url: "https://lucidata.oscarbahamonde.com",
-	image: "/lucidata_app.png"
+	image: "https://miro.medium.com/v2/resize:fit:804/format:webp/1*_wHSbu5vUwGkFtgWt6D_FQ.png"
   },
   {
     name: "Youtube Transcriber",
