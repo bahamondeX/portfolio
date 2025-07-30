@@ -378,6 +378,21 @@ const projects: Project[] = [
     name: "Youtube Transcriber",
     url: "http://aai.oscarbahamonde.com",
 	image: "/youtube_transcriber.png"
+  },
+  {
+    name: "rustid",
+    url: "https://github.com/bahamondex/rustid",
+	image: "https://e7.pngegg.com/pngimages/114/914/png-clipart-rust-programming-language-logo-machine-learning-haskell-crab-animals-cartoon.png"
+  },
+  {
+    name: "markdown_normalization",
+    url: "https://github.com/bahamondex/markdown_normalization",
+	image: "https://e7.pngegg.com/pngimages/114/914/png-clipart-rust-programming-language-logo-machine-learning-haskell-crab-animals-cartoon.png"
+  },
+  {
+    name: "base64perf",
+    url: "https://github.com/bahamondex/base64perf",
+	image: "https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg"
   }
 ]
 
