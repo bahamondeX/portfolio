@@ -413,7 +413,7 @@ const skills: Skill[] = [
   { name: 'Docker', icon: 'logos:docker-icon' },
  { name: 'Kubernetes', icon: 'logos:kubernetes' },
 { name: 'TypeScript', icon: 'logos:typescript-icon' },
-  { name: 'Vue.js', icon: 'logos:vue' },
+  { name: 'Nuxt.js', icon: 'logos:nuxt-icon' },
   { name: 'React', icon: 'logos:react' },
 	
  { name: 'Node.js', icon: 'logos:nodejs-icon' }, // Correct Lucide name 
