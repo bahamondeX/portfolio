@@ -382,12 +382,12 @@ const projects: Project[] = [
   {
     name: "rustid",
     url: "https://github.com/bahamondex/rustid",
-	image: "https://e7.pngegg.com/pngimages/114/914/png-clipart-rust-programming-language-logo-machine-learning-haskell-crab-animals-cartoon.png"
+	image: "https://www.rust-lang.org/logos/rust-logo-512x512.png"
   },
   {
     name: "markdown_normalization",
     url: "https://github.com/bahamondex/markdown_normalization",
-	image: "https://e7.pngegg.com/pngimages/114/914/png-clipart-rust-programming-language-logo-machine-learning-haskell-crab-animals-cartoon.png"
+	image: "https://www.rust-lang.org/logos/rust-logo-512x512.png"
   },
   {
     name: "base64perf",
