@@ -397,9 +397,9 @@ const projects: Project[] = [
 ]
 
 const accomplishments: string[] = [
-  "While working at Telefónica Perú, I faced a significant challenge: the company was burdened by immense technical debt, with systems siloed by a legacy mainframe controlling billing. This made innovation nearly impossible, as departments operated in isolation, and crucial processes were managed through inefficient tools like email and Excel.",
-  "I built Quipubase, Quipubase is a cutting-edge, real-time document database specifically engineered for the demands of AI-native applications. Key Features for Developers: High Performance: Built on RocksDB for efficient, high-throughput data operations.",
-  "Winner of AWS UG Peru Hackathon 'AWS Cybersecurity Day'"
+  "🚀 1. National Top Scorer – PUCP Admission Exam\nRanked 1st place nationwide out of over 4,000 applicants in the entrance exam for the Pontificia Universidad Católica del Perú (PUCP), scoring 86/100. This result reflects not only academic excellence but a capacity for competitive performance under pressure.",
+"🧠 2. Hackathon Winner – AWS-Backed National Event\nLed a randomly assigned team of three to first place among 50+ teams in a national AWS-sponsored hackathon in Peru. I assumed the role of Cloud Architect, designing a scalable infrastructure while collaborating with a Data Engineer and a DevOps Engineer. Our project outperformed seasoned and pre-formed teams in both technical innovation and implementation.",
+" 💡 3. Founder – Hybrid Database Bridging SQL, NoSQL & Vectors\nDesigned and developed a unified database engine that seamlessly integrates relational (SQL), document (NoSQL), and vector data models. Built with FastAPI, deployed on Google Cloud Run, and equipped with schema-first APIs and real-time query capabilities. Currently preparing for launch as a SaaS startup, with plans to apply to Y Combinator."
 ]
 
 const skills: Skill[] = [
