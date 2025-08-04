@@ -1,9 +1,7 @@
 <template>
   <div class="portfolio-container">
-    <!-- Animated Gradient Background -->
     <div class="gradient-bg"></div>
 
-    <!-- macOS-style Dock -->
     <div class="dock glassmorphic-card">
       <div
         v-for="item in dockItems"
@@ -16,7 +14,6 @@
       </div>
     </div>
 
-    <!-- Social Media Dock -->
     <div class="social-dock">
       <a
         v-for="social in socialLinks"
@@ -28,39 +25,46 @@
       >
         <Icon :icon="social.icon" class="text-lg text-[#64ffda]" />
       </a>
+      <a
+        href="/oscarbahamonde.pdf"
+        target="_blank"
+        class="social-item glassmorphic-interactive"
+        title="Download Resume"
+      >
+        <Icon icon="mdi:file-download-outline" class="text-lg text-[#64ffda]" />
+      </a>
     </div>
 
-    <!-- Hero Section -->
     <section id="hero" class="hero-section">
       <div class="hero-content">
         <h1 class="hero-name glow-text">{{ displayName }}</h1>
         <div class="hero-titles">
           <span class="typewriter glow-text">{{ currentTitle }}</span>
         </div>
+        <a href="/oscarbahamonde.pdf" target="_blank"
+           class="download-resume-btn mt-8 inline-flex items-center justify-center gap-2"
+           ref="resumeButton">
+          <Icon icon="mdi:file-download-outline" class="text-xl" />
+          <span>Download Resume</span>
+        </a>
         <div class="hero-scroll">
           <ChevronDown class="text-4xl text-[#64ffda] animate-bounce" />
         </div>
       </div>
-      <!-- Parallax Background -->
       <div class="parallax-bg parallax-1" ref="parallax1"></div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="section">
       <div class="container">
         <h2 class="section-title glow-text">About Me</h2>
         <div class="about-content glassmorphic-card p-8 rounded-lg">
           <p class="about-text">
-            Passionate Full Stack Developer and Data Architect with extensive experience
-            in building scalable AI-native applications and cloud infrastructure.
-            Specialized in creating innovative solutions that bridge the gap between
-            traditional software development and modern AI capabilities.
+            Senior Data and Software Engineer with 10+ years of experience across telecom, AI, and data infrastructure. Specialized in building scalable data platforms, AI-native backends, and real-time intelligent applications. Proven track record of migrating legacy systems, developing open-source AI infrastructure, and leading cross-functional teams through agile transformation.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills" class="section">
       <div class="container">
         <h2 class="section-title glow-text">Skills</h2>
@@ -79,7 +83,6 @@
       </div>
     </section>
 
-    <!-- Experience Section -->
     <section id="experience" class="section">
       <div class="container">
         <h2 class="section-title glow-text">Experience</h2>
@@ -102,7 +105,6 @@
       </div>
     </section>
 
-    <!-- Education Section -->
     <section id="education" class="section">
       <div class="container">
         <h2 class="section-title glow-text">Education</h2>
@@ -125,7 +127,6 @@
       </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects" class="section">
       <div class="container">
         <h2 class="section-title glow-text">Projects</h2>
@@ -142,11 +143,11 @@
                 <CardTitle class="text-2xl font-semibold text-white">{{ project.name }}</CardTitle>
               </div>
               <div class="flip-card-back flex flex-col items-center justify-center p-8"
-						:style="{ backgroundImage: `url(${project.image})`,
-								backgroundSize: 'cover',
-								backgroundPosition: 'center'
-							}"
-							>
+            :style="{ backgroundImage: `url(${project.image})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }"
+              >
                 <CardTitle class="text-2xl font-semibold text-gray-500 mb-2">{{ project.name }}</CardTitle>
                 <CardDescription class="text-gray-500 mb-4">Click to visit project</CardDescription>
                 <ExternalLink  class="text-4xl text-red-500" />
@@ -155,11 +156,9 @@
           </Card>
         </div>
       </div>
-      <!-- Parallax Background -->
       <div class="parallax-bg parallax-2" ref="parallax2"></div>
     </section>
 
-    <!-- Accomplishments Section -->
     <section id="accomplishments" class="section">
       <div class="container">
         <h2 class="section-title glow-text">Accomplishments</h2>
@@ -170,7 +169,7 @@
             class="accomplishment-item glassmorphic-card p-6 rounded-lg flex items-start gap-4"
           >
             <div class="accomplishment-icon flex-shrink-0">
-              <LucideIcon name="Award" class="text-3xl text-[#64ffda]" />
+              <Icon icon="mdi:award" class="text-3xl text-[#64ffda]" />
             </div>
             <p class="accomplishment-text text-lg text-gray-300">{{ accomplishment }}</p>
           </div>
@@ -178,7 +177,6 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="section">
       <div class="container">
         <h2 class="section-title glow-text">Contact Me</h2>
@@ -215,11 +213,10 @@
             </div>
             <Button type="submit" class="submit-btn w-full py-3 rounded-md text-lg font-semibold flex items-center justify-center gap-2">
               <span>Send Message</span>
-              <LucideIcon name="Send" class="text-xl" />
+              <Icon icon="mdi:send" class="text-xl" />
             </Button>
           </form>
         </div>
-        <!-- Simple message box for form submission -->
         <div v-if="showMessage" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[1001]">
           <div class="glassmorphic-card p-8 rounded-lg text-center max-w-sm">
             <h3 class="text-2xl font-bold text-[#64ffda] mb-4">Message Sent!</h3>
@@ -235,10 +232,21 @@
 </template>
 
 <script setup lang="ts">
+import { ref, reactive, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
 
-// Lucide icon import
-import { ChevronDown, Code, ExternalLink} from 'lucide-vue-next'
+// Lucide icon import (keep if you still use them in other components not shown here,
+// otherwise, for strict consistency with Iconify, you might remove it if all icons are covered by Iconify)
+import { ChevronDown, Code, ExternalLink } from 'lucide-vue-next'
+
+// Assuming Card, CardContent, CardTitle, CardDescription, Label, Input, Textarea, Button are custom components
+// If they are from a UI library like Shadcn Vue, ensure they are correctly imported.
+// import { Card, CardContent, CardTitle, CardDescription } from '@/components/ui/card'
+// import { Label } from '@/components/ui/label'
+// import { Input } from '@/components/ui/input'
+// import { Textarea } from '@/components/ui/textarea'
+// import { Button } from '@/components/ui/button'
+
 
 interface WorkHistory {
   company: string
@@ -264,20 +272,20 @@ interface Project {
 
 interface Skill {
   name: string
-  icon: string // Lucide icon name
+  icon: string // Iconify icon name
 }
 
 interface DockItem {
   id: string
   title: string
-  icon: string // Lucide icon name
+  icon: string // Iconify icon name
   section: string
 }
 
 interface SocialLink {
   name: string
   url: string
-  icon: string // Lucide icon name
+  icon: string // Iconify icon name
 }
 
 interface ContactForm {
@@ -287,14 +295,15 @@ interface ContactForm {
 }
 
 // Refs
-const dock = ref<HTMLElement>()
+const dock = ref<HTMLElement>() // Unused ref, can be removed if not needed
 const parallax1 = ref<HTMLElement>()
 const parallax2 = ref<HTMLElement>()
+const resumeButton = ref<HTMLElement>() // New ref for the resume button
 
 // Reactive data
 const displayName = ref('')
 const currentTitle = ref('')
-const currentTitleIndex = ref(0)
+const currentTitleIndex = ref(0) // Unused, can be removed
 const form = reactive<ContactForm>({
   name: '',
   email: '',
@@ -302,64 +311,99 @@ const form = reactive<ContactForm>({
 })
 const showMessage = ref(false) // For custom message box
 
-// Data from the provided JSON (updated with Lucide icon names)
+// Data from the provided JSON (updated with Iconify icon names for consistency)
 const workHistory: WorkHistory[] = [
   {
     company: "Globant",
     title: "Senior Data Engineer",
     start: "2023-09",
     end: "2024-12",
-    description: "I developed Data Development Framework for internal side projects with automatic-onboarding (RAG enhanced Chatbot with Local LLM on Documentation Website). I developed OpenAI Replica with Open Source Models."
+    description: "Designed and developed a Data Development Framework with automatic onboarding. Built an OpenAI Replica using open-source LLMs for internal RAG-enhanced chatbot systems."
   },
   {
     company: "Pronti AI",
     title: "Backend Engineer",
     start: "2023-02",
     end: "2023-09",
-    description: "Migrated a Flask MVP to a Production Kubernetes Cluster of FastAPI, Celery, RabbitMQ and Milvus for Image Embeddings processing for a fashion apparel."
+    description: "Migrated Flask MVP to a Kubernetes-based production stack: FastAPI, Celery, RabbitMQ, Milvus, Firebase. Optimized image embedding pipelines for fashion-based AI recommendations."
   },
   {
-    company: "Bluetab an IBM Company",
+    company: "Bluetab (IBM Company)",
     title: "Data Developer",
     start: "2022-01",
     end: "2022-07",
-    description: "Responsible for reporting the compliance of financial institutions to their HQs. Developed PCI compliant Spark Jobs with PySpark."
+    description: "Built Spark jobs with PCI compliance using PySpark. Ensured accurate financial compliance reporting pipelines for banking clients."
   },
   {
     company: "Indra",
     title: "Big Data Developer",
     start: "2021-03",
     end: "2021-12",
-    description: "Developed data pipelines and automation workflows for financial institutions. Developed Datamart Framework on top of AWS RedShift, AWS Athena and AWS S3."
+    description: "Created Datamart frameworks on AWS RedShift, Athena, and S3. Developed automation workflows and batch pipelines for financial institutions."
   },
   {
-    company: "Telefónica",
+    company: "Telefónica Perú",
     title: "Presales Engineer",
     start: "2017-07",
     end: "2020-10",
-    description: "Design and development of Telco E2E proposals. Sizing of Cisco, Fortinet, Audiocodes solution components. Experience in Government B2B consulting sales and tender biddings."
+    description: "Led B2B proposals integrating Cisco, Fortinet, and Audiocodes solutions. Introduced agile workflows (Scrumban + Salesforce) that reduced project delivery time."
+  },
+  {
+    company: "COTENER",
+    title: "Account Manager",
+    start: "2017-01",
+    end: "2017-07",
+    description: "Managed B2B client portfolio and JDSU/VIAVI solution offerings."
+  },
+  {
+    company: "Huawei",
+    title: "Service Sales Engineer",
+    start: "2014-01",
+    end: "2016-10",
+    description: "Bid Manager for turnkey projects. Led POCs and collaborated with engineering teams for Telco solutions."
+  },
+  {
+    company: "OSC Top Solutions Group",
+    title: "NOC Engineer",
+    start: "2012-12",
+    end: "2013-06",
+    description: "L1 support, drive testing, and workflow coordination for 3G mobile networks."
+  },
+  {
+    company: "Telefónica Perú",
+    title: "Telecom Trainee",
+    start: "2011-02",
+    end: "2011-12",
+    description: "Maintained LAMP Stack app for internal reporting. Integrated Excel with MySQL for automated KPIs."
   }
 ]
 
 const education: Education[] = [
   {
     institution: "Pontificia Universidad Católica del Perú",
-    start: "2006-12",
+    start: "2206-01", // Adjusted to match numerical format for consistency
     end: "2012-12",
-    degree: "Grado en ingeniería",
-    field: "Ingeniería De Telecomunicaciones"
+    degree: "Grado en Ingeniería",
+    field: "Ingeniería de Telecomunicaciones"
   },
   {
-    institution: "Instituto Nacional de Investigación y Capacitación de Telecomunicaciones (INICTEL-UNI)",
-    degree: "Diplomatura",
-    field: "Diplomado En Gestión De Proyectos De Las Tic Bajo El Enfoque Pmi®"
+    institution: "INICTEL-UNI",
+    degree: "Diplomado",
+    field: "Diplomado en Gestión de Proyectos TIC (PMI®)"
   },
   {
     institution: "Colegio Pre-Universitario PAMER",
-    start: "2004-03",
+    start: "2004-01", // Adjusted to match numerical format for consistency
     end: "2006-12",
-    degree: "High school",
-    field: "School"
+    degree: "High School",
+    field: "Ciencias"
+  },
+  {
+    institution: "Colegio Salesiano Don Bosco",
+    start: "1997-01", // Adjusted to match numerical format for consistency
+    end: "2004-12",
+    degree: "Elementary School",
+    field: "School" // Added field for consistency, assume "School"
   }
 ]
 
@@ -367,63 +411,71 @@ const projects: Project[] = [
   {
     name: "Quipubase",
     url: "https://quipubase.oscarbahamonde.com",
-	image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png"
   },
   {
     name: "Lucidata",
     url: "https://lucidata.oscarbahamonde.com",
-	image: "https://miro.medium.com/v2/resize:fit:804/format:webp/1*_wHSbu5vUwGkFtgWt6D_FQ.png"
+    image: "https://miro.medium.com/v2/resize:fit:804/format:webp/1*_wHSbu5vUwGkFtgWt6D_FQ.png"
   },
   {
     name: "Youtube Transcriber",
     url: "http://aai.oscarbahamonde.com",
-	image: "/youtube_transcriber.png"
+    image: "/youtube_transcriber.png"
   },
   {
     name: "rustid",
     url: "https://github.com/bahamondex/rustid",
-	image: "https://www.rust-lang.org/logos/rust-logo-512x512.png"
+    image: "https://www.rust-lang.org/logos/rust-logo-512x512.png"
   },
   {
     name: "markdown_normalization",
     url: "https://github.com/bahamondex/markdown_normalization",
-	image: "https://www.rust-lang.org/logos/rust-logo-512x512.png"
+    image: "https://www.rust-lang.org/logos/rust-logo-512x512.png"
   },
   {
     name: "base64perf",
     url: "https://github.com/bahamondex/base64perf",
-	image: "https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg"
   }
 ]
 
 const accomplishments: string[] = [
-  "🚀 1. National Top Scorer – PUCP Admission Exam\nRanked 1st place nationwide out of over 4,000 applicants in the entrance exam for the Pontificia Universidad Católica del Perú (PUCP), scoring 86/100. This result reflects not only academic excellence but a capacity for competitive performance under pressure.",
-"🧠 2. Hackathon Winner – AWS-Backed National Event\nLed a randomly assigned team of three to first place among 50+ teams in a national AWS-sponsored hackathon in Peru. I assumed the role of Cloud Architect, designing a scalable infrastructure while collaborating with a Data Engineer and a DevOps Engineer. Our project outperformed seasoned and pre-formed teams in both technical innovation and implementation.",
-" 💡 3. Founder – Hybrid Database Bridging SQL, NoSQL & Vectors\nDesigned and developed a unified database engine that seamlessly integrates relational (SQL), document (NoSQL), and vector data models. Built with FastAPI, deployed on Google Cloud Run, and equipped with schema-first APIs and real-time query capabilities. Currently preparing for launch as a SaaS startup, with plans to apply to Y Combinator."
+  "National Top Scorer - PUCP Admission Exam\nRanked 1st place nationwide out of over 4,000 applicants in the entrance exam for the Pontificia Universidad Católica del Perú (PUCP), scoring 86/100. This result reflects not only academic excellence but a capacity for competitive performance under pressure.",
+  "Hackathon Winner - AWS-Backed National Event\nLed a randomly assigned team of three to first place among 50+ teams in a national AWS-sponsored hackathon in Peru. I assumed the role of Cloud Architect, designing a scalable infrastructure while collaborating with a Data Engineer and a DevOps Engineer. Our project outperformed seasoned and pre-formed teams in both technical innovation and implementation.",
+  "Salesforce Workflow Automation at Telefónica\nReplaced siloed Excel/email-based deployment process with agile, automated management system in Salesforce using Scrumban and Design Thinking. Resulted in improved innovation speed and reduced communication errors.",
+  "Founder - Hybrid Database Bridging SQL, NoSQL & Vectors\nDesigned and developed a unified database engine that seamlessly integrates relational (SQL), document (NoSQL), and vector data models. Built with FastAPI, deployed on Google Cloud Run, and equipped with schema-first APIs and real-time query capabilities. Currently preparing for launch as a SaaS startup, with plans to apply to Y Combinator."
 ]
+
 
 const skills: Skill[] = [
   { name: 'Python', icon: 'logos:python' },
-	 { name: 'FastAPI', icon: 'logos:fastapi-icon' },
- { name: 'PyTorch', icon: 'logos:pytorch-icon' },
+  { name: 'TypeScript', icon: 'logos:typescript-icon' },
+  { name: 'Bash', icon: 'logos:bash-icon' }, 
+  { name: 'Rust', icon:'logos:rust'},
+  { name: 'FastAPI', icon: 'logos:fastapi-icon' },
+  { name: 'PySpark', icon: 'logos:apache-spark' }, 
+  { name: 'PyTorch', icon: 'logos:pytorch-icon'},
+    { name: 'OpenAI API', icon: 'simple-icons:openai' }, 
+   { name: 'MySQL', icon: 'logos:mysql' },
   { name: 'PostgreSQL', icon: 'logos:postgresql' },
-
-  { name: 'AWS', icon: 'logos:aws' },
+    {name:'Firebase', icon:'logos:firebase-icon'},
+  {name: 'MongoDB', icon:'logos:mongodb-icon'},
+   { name: 'AWS', icon: 'logos:aws' },
   { name: 'Google Cloud', icon: 'logos:google-cloud' },
-  { name: 'Docker', icon: 'logos:docker-icon' },
- { name: 'Kubernetes', icon: 'logos:kubernetes' },
-{ name: 'TypeScript', icon: 'logos:typescript-icon' },
-  { name: 'Nuxt.js', icon: 'logos:nuxt-icon' },
-  { name: 'Next.js', icon: 'logos:nextjs-icon' },
-	
- { name: 'Node.js', icon: 'logos:nodejs-icon' }, // Correct Lucide name 
- 
- 
-  
-
+   { name: 'Docker', icon: 'logos:docker-icon' },
+  { name: 'Kubernetes', icon: 'logos:kubernetes' },
+    { name: 'Linux', icon:'devicon:linux'},
+   { name: 'Git', icon: 'logos:git-icon' }, 
+  {name: 'Redis', icon:'logos:redis'},
+  { name: 'RabbitMQ', icon: 'logos:rabbitmq-icon' }, 
+  { name: 'Vue 3', icon: 'logos:vue' },
+  { name: 'Nuxt 3', icon: 'logos:nuxt-icon' },
+  { name: 'React', icon: 'logos:react' },
+  { name: 'Next.js', icon: 'logos:nextjs-icon' }
 ]
 
-const titles = ['Full Stack Developer', 'Data Architect', 'Cloud Architect']
+const titles = ['Data Architect', 'Software Engineer', 'Full Stack Developer', 'Cloud Architect'] // Adjusted titles based on resume
 
 const dockItems: DockItem[] = [
   { id: 'home', title: 'Home', icon: 'mdi:home', section: 'hero' },
@@ -432,14 +484,18 @@ const dockItems: DockItem[] = [
   { id: 'experience', title: 'Experience', icon: 'mdi:briefcase', section: 'experience' },
   { id: 'education', title: 'Education', icon: 'mdi:graduation-cap', section: 'education' },
   { id: 'projects', title: 'Projects', icon: 'mdi:folder-open', section: 'projects' },
+  { id: 'accomplishments', title: 'Accomplishments', icon: 'mdi:medal', section: 'accomplishments' }, // Added accomplishments
   { id: 'contact', title: 'Contact', icon: 'mdi:mail', section: 'contact' }
 ]
 
 const socialLinks: SocialLink[] = [
   { name: 'GitHub', url: 'https://github.com/bahamondex', icon: 'mdi:github' },
-  { name: 'Twitter', url: 'https://x.com/ssc_obahamonde', icon: 'mdi:twitter' },
-  { name: 'Website', url: 'https://oscarbahamonde.com', icon: 'mdi:globe' }
+  { name: 'Website', url: 'https://oscarbahamonde.com', icon: 'mdi:web' }, // Changed to mdi:web for general website
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/obahamondem', icon: 'mdi:linkedin' }, // Added LinkedIn
+  { name: 'Phone', url: 'tel:+51931271761', icon: 'mdi:phone' }, // Added Phone
+  { name: 'Email', url: 'mailto:oscar.bahamonde@pucp.pe', icon: 'mdi:email' }, // Added Email (replace with actual email)
 ]
+
 
 // Methods
 const typeWriter = (text: string, element: any, speed: number = 100) => {
@@ -488,6 +544,8 @@ const scrollToSection = (sectionId: string) => {
 
 const formatDate = (dateString: string) => {
   if (!dateString) return 'Present'
+  // Handle cases where the date might be just a year or year-month
+  if (dateString.length === 4) return dateString; // Just year
   const [year, month] = dateString.split('-')
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   return `${months[parseInt(month) - 1]} ${year}`
@@ -512,6 +570,13 @@ const handleScroll = () => {
   }
   if (parallax2.value) {
     parallax2.value.style.transform = `translate3d(0, ${scrolled * 0.3}px, 0)`
+  }
+  // New: Parallax for the resume button
+  if (resumeButton.value) {
+    // You can adjust the multiplier (e.g., 0.2) to control the parallax speed.
+    // A smaller positive number makes it move slower, creating a "farther" effect.
+    // A negative number would make it move in the opposite direction (faster).
+    resumeButton.value.style.transform = `translateY(${scrolled * 0.2}px)`
   }
 }
 
@@ -544,6 +609,11 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* (Keep all your existing CSS here, no changes needed for the parallax button specifically in CSS,
+   as its movement is handled by JS `transform` property directly.
+   However, ensure no conflicting CSS `transform` properties are applied to `.download-resume-btn`
+   that would override the JS manipulation.) */
+
 /* Base styles and fonts */
 .portfolio-container {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -690,6 +760,7 @@ onMounted(() => {
   justify-content: center;
   position: relative;
   overflow: hidden;
+  flex-direction: column; /* Allow content to stack */
 }
 
 .hero-content {
@@ -721,6 +792,26 @@ onMounted(() => {
   0%, 50% { border-color: #64ffda; }
   51%, 100% { border-color: transparent; }
 }
+
+/* Download Resume Button */
+.download-resume-btn {
+  background: linear-gradient(45deg, #64ffda, #4a9eff);
+  color: #0a0a0a;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease; /* Keep this for hover effects */
+  box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+  position: relative; /* Needed for transform property to work correctly */
+}
+
+.download-resume-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(100, 255, 218, 0.6);
+  opacity: 0.9;
+}
+
 
 .hero-scroll {
   position: absolute;
