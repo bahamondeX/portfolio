@@ -295,7 +295,6 @@ interface ContactForm {
 }
 
 // Refs
-const dock = ref<HTMLElement>() // Unused ref, can be removed if not needed
 const parallax1 = ref<HTMLElement>()
 const parallax2 = ref<HTMLElement>()
 const resumeButton = ref<HTMLElement>() // New ref for the resume button
